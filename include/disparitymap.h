@@ -43,7 +43,8 @@ class DisparityMapMaker
 private:
 	Mat disparitymap;
 	int numDisparities, blockSize;
-	Ptr<StereoBM> left_matcher, right_matcher;
+	Ptr<StereoMatcher> left_matcher;
+	Ptr<StereoMatcher> right_matcher;
 	Ptr<DisparityWLSFilter> wls_filter;
 public:
 	/*

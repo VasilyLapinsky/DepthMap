@@ -23,6 +23,6 @@ void videoCameraTest()
 
 int main()
 {
-
+	videoCameraTest();
 	return 0;
 }
