@@ -3,8 +3,11 @@ cmake_minimum_required(VERSION 3.5)
 project (DisparityMap)
 
 set(SOURCES 
-		src/main.cpp 
-		src/disparitymap.cpp
+		src/main.cpp
+		src/StereoImagePreprocessor
+		src/DisparityMapMaker
+		src/DisparityMapWriter
+		src/dispmapvideotesting
 )
 
 
