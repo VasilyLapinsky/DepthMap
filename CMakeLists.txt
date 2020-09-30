@@ -7,7 +7,10 @@ set(SOURCES
 		src/StereoImagePreprocessor
 		src/DisparityMapMaker
 		src/DisparityMapWriter
+		src/DepthMapMaker
+		src/DepthImageMaker
 		src/dispmapvideotesting
+		src/depthmapvideotesting
 )
 
 

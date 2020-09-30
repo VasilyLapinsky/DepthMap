@@ -1,7 +1,8 @@
 #include "dispmapvideotesting.h"
+#include "depthmapvideotesting.h"
 
 int main()
 {
-	videoCameraTest();
+	videoCameraDepthTest(325, 150);
 	return 0;
 }
