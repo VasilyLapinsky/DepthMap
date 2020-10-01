@@ -15,10 +15,6 @@ set(SOURCES
 		src/depthmapvideotesting
 )
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources/Qf25.txt
-    ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-
-
 # adding papackages
 find_package(OpenCV REQUIRED)
 if(NOT OpenCV_FOUND)
@@ -30,6 +26,10 @@ endif()
 
 # adding exe
 add_executable(DisparityMap ${SOURCES})
+
+# adding resource file
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources/Qf25.txt
+    ${EXECUTABLE_OUTPUT_PATH} COPYONLY)
 
 # adding include dir
 target_include_directories(DisparityMap
