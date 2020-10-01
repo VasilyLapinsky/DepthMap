@@ -29,7 +29,7 @@ add_executable(DisparityMap ${SOURCES})
 
 # adding resource file
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources/Qf25.txt
-    ${EXECUTABLE_OUTPUT_PATH} COPYONLY)
+    ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 # adding include dir
 target_include_directories(DisparityMap

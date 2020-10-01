@@ -39,7 +39,7 @@ float DepthMapMaker::compute(cv::Mat& disparityMap, int targetX, int targetY)
 	vec.at<float>(2) = disparityMap.at<short>(targetX, targetY) / 16.0f;
 	vec.at<float>(3) = 1;
 	// compute Q*vec result is vector [X, Y, Z, W]
-	cv::Mat result = Q * vec;
+	cv::Mat result =  Q * vec;
 	// return Z/W 
 	return result.at<float>(2) / result.at<float>(3);
 }
