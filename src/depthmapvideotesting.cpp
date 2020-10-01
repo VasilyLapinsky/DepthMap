@@ -3,14 +3,10 @@
 void addTarget(cv::Mat& img, int x, int y)
 {
 	for (int i = x - 50; i < x + 50; i++) {
-		img.at<Vec3b>(y, i)[0] = 255;
-		img.at<Vec3b>(y, i)[1] = 255;
-		img.at<Vec3b>(y, i)[2] = 255;
+		img.at<uchar>(y, i) = 250;
 	}
 	for (int j = y - 50; j < y + 50; j++) {
-		img.at<Vec3b>(j, x)[0] = 255;
-		img.at<Vec3b>(j, x)[1] = 255;
-		img.at<Vec3b>(j, x)[2] = 255;
+		img.at<uchar>(j, x) = 250;
 	}
 }
 
@@ -24,13 +20,14 @@ void videoCameraDepthTest(int targetX, int targetY)
 	StereoImagePreprocessor preProcessor(COLOR_BGR2GRAY, 1, 1, INTER_LINEAR_EXACT);
 	DepthImageMaker depthMaker("Qf25.txt", 32, 15);
 	double distance;
-	Mat image, left;
+	Mat image, left, right;
 
 	for (;;) {
 		cap >> image;
 		preProcessor.process(image);
 		preProcessor.getleft().copyTo(left);
-		distance = depthMaker.compute(left, targetX, targetY);
+		preProcessor.getright().copyTo(right);
+		distance = depthMaker.compute(left, right, targetX, targetY);
 
 		addTarget(left, targetX, targetY);
 		putText(left, "Distance:   " + to_string(distance), Point(100, 100),

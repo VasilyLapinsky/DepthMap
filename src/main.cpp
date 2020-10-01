@@ -3,6 +3,13 @@
 
 int main()
 {
-	videoCameraDepthTest(325, 150);
+	try
+	{
+		videoCameraDepthTest(325, 150);
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
+	}
+	system("pause");
 	return 0;
 }

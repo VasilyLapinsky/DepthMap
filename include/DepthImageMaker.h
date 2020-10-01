@@ -30,5 +30,5 @@ public:
 	@targetX - x coordinate of target point
 	@targetY - y coordinate of target point
 	*/
-	double compute(Mat& image, int targetX, int targetY);
+	double compute(cv::Mat& left, cv::Mat& right, int targetX, int targetY);
 };

@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
+# project name
 project (DisparityMap)
 
+# source files
 set(SOURCES 
 		src/main.cpp
 		src/StereoImagePreprocessor
@@ -13,7 +15,11 @@ set(SOURCES
 		src/depthmapvideotesting
 )
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources/Qf25.txt
+    ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
+
+# adding papackages
 find_package(OpenCV REQUIRED)
 if(NOT OpenCV_FOUND)
 	message(SEND_ERROR "Failed to find OpenCV")
@@ -22,12 +28,14 @@ else()
 	include_directories(${OpenCV_INCLUDE_DIR})
 endif()
 
-
+# adding exe
 add_executable(DisparityMap ${SOURCES})
 
+# adding include dir
 target_include_directories(DisparityMap
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
 
 target_link_libraries(DisparityMap ${OpenCV_LIBS})
+
