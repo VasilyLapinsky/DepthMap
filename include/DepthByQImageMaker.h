@@ -3,7 +3,7 @@
 #include "DepthMapMaker.h"
 
 // Computes depth from an image
-class DepthImageMaker
+class DepthByQImageMaker
 {
 private:
 	DisparityMapMaker dispMaker;
@@ -14,7 +14,7 @@ public:
 	@param numDisparities - number of disparities for disparity map computation
 	@blockSize - block size for disparity map computation
 	*/
-	DepthImageMaker(cv::Mat& Q, int numDisparities = 0, int blockSize = 21);
+	DepthByQImageMaker(cv::Mat& Q, int numDisparities = 0, int blockSize = 21);
 
 	/*
 	@param filename - name of file from where will be read 
@@ -22,7 +22,7 @@ public:
 	@param numDisparities - number of disparities for disparity map computation
 	@blockSize - block size for disparity map computation
 	*/
-	DepthImageMaker(std::string filename, int numDisparities = 0, int blockSize = 21);
+	DepthByQImageMaker(std::string filename, int numDisparities = 0, int blockSize = 21);
 
 	/*
 	Computes depth in specific place(targetX, targetY) of an image

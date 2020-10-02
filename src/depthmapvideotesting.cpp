@@ -18,7 +18,7 @@ void videoCameraDepthTest(int targetX, int targetY)
 		return;
 	}
 	StereoImagePreprocessor preProcessor(COLOR_BGR2GRAY, 1, 1, INTER_LINEAR_EXACT);
-	DepthImageMaker depthMaker("Qf25.txt", 32, 15);
+	DepthByQImageMaker depthMaker("Qf25.txt", 32, 15);
 	double distance;
 	Mat image, left, right;
 
@@ -33,6 +33,31 @@ void videoCameraDepthTest(int targetX, int targetY)
 		putText(left, "Distance:   " + to_string(distance), Point(100, 100),
 			FONT_HERSHEY_COMPLEX_SMALL, 0.8, Scalar(200, 200, 250), 1);
 		imshow("result", left);
+
+		if (waitKey(33) >= 0) break;
+	}
+}
+
+void videoCameraDepthBfTest()
+{
+	VideoCapture cap(1);
+	if (!cap.isOpened()) {
+		cout << "Error opening video stream or file" << endl;
+		return;
+	}
+	StereoImagePreprocessor preProcessor(COLOR_BGR2GRAY, 1, 1, INTER_LINEAR_EXACT);
+	DepthByBfImageMaker depthMaker(12, 700.5550, 32, 15);
+	DisparityMapWriter writer("Depth map", CV_8UC1, COLORMAP_JET);
+	double distance;
+	Mat image, left, right;
+
+	for (;;) {
+		cap >> image;
+		preProcessor.process(image);
+		preProcessor.getleft().copyTo(left);
+		preProcessor.getright().copyTo(right);
+
+		writer.show(depthMaker.compute(left, right));
 
 		if (waitKey(33) >= 0) break;
 	}

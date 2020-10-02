@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 # project name
-project (DisparityMap)
+project (DepthMap)
 
 # source files
 set(SOURCES 
@@ -10,7 +10,9 @@ set(SOURCES
 		src/DisparityMapMaker
 		src/DisparityMapWriter
 		src/DepthMapMaker
-		src/DepthImageMaker
+		src/DepthBfMapMaker
+		src/DepthByQImageMaker
+		src/DepthByBfImageMaker
 		src/dispmapvideotesting
 		src/depthmapvideotesting
 )
@@ -25,17 +27,17 @@ else()
 endif()
 
 # adding exe
-add_executable(DisparityMap ${SOURCES})
+add_executable(DepthMap ${SOURCES})
 
 # adding resource file
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/resources/Qf25.txt
     ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 # adding include dir
-target_include_directories(DisparityMap
+target_include_directories(DepthMap
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(DisparityMap ${OpenCV_LIBS})
+target_link_libraries(DepthMap ${OpenCV_LIBS})
 
