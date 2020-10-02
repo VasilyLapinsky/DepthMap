@@ -5,7 +5,7 @@ int main()
 {
 	try
 	{
-		videoCameraDepthBfTest();
+		videoCameraDepthBfTest(325, 150);
 	}
 	catch (exception& e) {
 		cout << e.what() << endl;

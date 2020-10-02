@@ -57,7 +57,42 @@ void videoCameraDepthBfTest()
 		preProcessor.getleft().copyTo(left);
 		preProcessor.getright().copyTo(right);
 
+		GaussianBlur(left, left, Size{ 5,5 }, 0);
+		GaussianBlur(right, right, Size{ 5,5 }, 0);
+
 		writer.show(depthMaker.compute(left, right));
+
+		if (waitKey(33) >= 0) break;
+	}
+}
+
+void videoCameraDepthBfTest(int targetX, int targetY)
+{
+	VideoCapture cap(1);
+	if (!cap.isOpened()) {
+		cout << "Error opening video stream or file" << endl;
+		return;
+	}
+	StereoImagePreprocessor preProcessor(COLOR_BGR2GRAY, 1, 1, INTER_LINEAR_EXACT);
+	DepthByBfImageMaker depthMaker(12, 0.2802, 32, 15);
+	double distance;
+	Mat image, left, right;
+
+	for (;;) {
+		cap >> image;
+		preProcessor.process(image);
+		preProcessor.getleft().copyTo(left);
+		preProcessor.getright().copyTo(right);
+
+		GaussianBlur(left, left, Size{ 5,5 }, 0);
+		GaussianBlur(right, right, Size{ 5,5 }, 0);
+
+		distance = depthMaker.compute(left, right, targetX, targetY);
+
+		addTarget(left, targetX, targetY);
+		putText(left, "Distance:   " + to_string(distance), Point(100, 100),
+			FONT_HERSHEY_COMPLEX_SMALL, 0.8, Scalar(200, 200, 250), 1);
+		imshow("result", left);
 
 		if (waitKey(33) >= 0) break;
 	}

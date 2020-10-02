@@ -11,3 +11,6 @@ void videoCameraDepthTest(int targetX, int targetY);
 
 // test depth map by Bf with stereo camera
 void videoCameraDepthBfTest();
+
+// test depth map by Bf with stereo camera in specific point(targetX, targetY)
+void videoCameraDepthBfTest(int targetX, int targetY);
